@@ -1,0 +1,57 @@
+/* Bestaande stijlen */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* Nieuwe stijlen voor je knoppen */
+
+/* Rode knop met witte tekst */
+.btn-custom {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    /* Hover effect voor de rode knop */
+    .btn-custom:hover {
+        background-color: darkred;
+    }
+
+/* Stijl voor de 'Terug' knop (optioneel een andere stijl) */
+.btn-secondary-custom {
+    background-color: gray;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    /* Hover effect voor de terugknop */
+    .btn-secondary-custom:hover {
+        background-color: darkgray;
+    }
