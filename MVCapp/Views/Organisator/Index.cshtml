@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MVCapp.Models.Organisator>
+
+@{
+    ViewData["Title"] = "Mijn Evenementen";
+}
+
+<h2>Mijn Evenementen</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Locatie</th>
+            <th>Datum</th>
+            <th>Acties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Location</td>
+                <td>@item.EventDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Bewerken</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Verwijderen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

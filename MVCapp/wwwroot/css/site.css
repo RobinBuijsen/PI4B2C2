@@ -1,57 +1,109 @@
-/* Bestaande stijlen */
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
-    margin-bottom: 60px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Nieuwe stijlen voor je knoppen */
+/* Landing Page */
+.landing-page {
+    text-align: center;
+}
 
-/* Rode knop met witte tekst */
-.btn-custom {
+h1 {
+    font-size: 3.5em; /* Vergroot de koptekst */
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.eventia-logo {
+    width: 300px; /* Vergroot de breedte van de afbeelding */
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.button-container {
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-block;
+    padding: 20px 40px; /* Vergroot de padding voor grotere knoppen */
+    margin: 15px;
+    font-size: 1.5em; /* Vergroot de tekst in de knoppen */
+    text-decoration: none;
+    color: black;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Voeg een transform effect toe */
+}
+
+.bezoeker {
+    background-color: yellow;
+}
+
+.organisator {
     background-color: red;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
 }
 
-    /* Hover effect voor de rode knop */
-    .btn-custom:hover {
-        background-color: darkred;
-    }
-
-/* Stijl voor de 'Terug' knop (optioneel een andere stijl) */
-.btn-secondary-custom {
-    background-color: gray;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
+.button:hover {
+    opacity: 0.9;
+    transform: scale(1.05); /* Voeg een lichte vergroting toe op hover */
 }
 
-    /* Hover effect voor de terugknop */
-    .btn-secondary-custom:hover {
-        background-color: darkgray;
+/* Header en Navigatie */
+header.navbar {
+    background-color: #333;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    font-size: 1.25em;
+}
+
+.navbar-container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1.75em;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+    .navbar-links ul li {
+        margin-right: 20px;
     }
+
+        .navbar-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .navbar-links ul li a:hover {
+                color: #ddd;
+            }
+
+/* Inhoud-container om te zorgen dat de inhoud niet onder de header valt */
+.content-container {
+    padding-top: 120px;
+    text-align: center;
+}

@@ -23,8 +23,8 @@ namespace MVCapp.Controllers
             return View();
         }
 
-        // EventPlanning-pagina
-        public ActionResult EventPlanning()
+       
+        public ActionResult LandingPage()
         {
             return View();
         }

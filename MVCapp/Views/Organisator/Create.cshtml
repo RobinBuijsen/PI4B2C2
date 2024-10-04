@@ -1,0 +1,58 @@
+﻿@model MVCapp.Models.Organisator
+
+@{
+    ViewData["Title"] = "Nieuw Evenement Aanmaken";
+}
+
+<h2>Nieuw Evenement Aanmaken</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Titel</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Locatie</label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Datum en Tijd</label>
+        <input asp-for="EventDateTime" class="form-control" type="datetime-local" />
+        <span asp-validation-for="EventDateTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Kosten</label>
+        <input asp-for="Cost" class="form-control" />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Maximaal aantal deelnemers</label>
+        <input asp-for="MaxParticipants" class="form-control" />
+        <span asp-validation-for="MaxParticipants" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Wervende Tekst</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Categorie</label>
+        <select asp-for="Category" class="form-control">
+            <option value="Foodtruck">Foodtruck</option>
+            <option value="Theater">Theater</option>
+            <option value="Muziek">Muziek</option>
+            <option value="Dating">Dating</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Evenement Aanmaken</button>
+</form>
