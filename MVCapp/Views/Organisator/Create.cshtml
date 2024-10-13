@@ -1,58 +1,67 @@
 ﻿@model MVCapp.Models.Organisator
 
-@{
-    ViewData["Title"] = "Nieuw Evenement Aanmaken";
+<h2>Activiteit maken</h2>
+
+<!-- Toon validatiefouten, indien aanwezig -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
 }
 
-<h2>Nieuw Evenement Aanmaken</h2>
-
-<form asp-action="Create" method="post" enctype="multipart/form-data">
+<form asp-action="Create" method="post">
     <div class="form-group">
-        <label>Titel</label>
-        <input asp-for="Title" class="form-control" />
+        <label for="Title">Naam activiteit</label>
+        <input type="text" class="form-control" id="Title" asp-for="Title" placeholder="Naam activiteit" required />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-
     <div class="form-group">
-        <label>Locatie</label>
-        <input asp-for="Location" class="form-control" />
-        <span asp-validation-for="Location" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label>Datum en Tijd</label>
-        <input asp-for="EventDateTime" class="form-control" type="datetime-local" />
+        <label for="EventDateTime">Datum & tijd</label>
+        <input type="datetime-local" class="form-control" id="EventDateTime" asp-for="EventDateTime" required />
         <span asp-validation-for="EventDateTime" class="text-danger"></span>
     </div>
-
     <div class="form-group">
-        <label>Kosten</label>
-        <input asp-for="Cost" class="form-control" />
-        <span asp-validation-for="Cost" class="text-danger"></span>
+        <label for="Location">Locatie</label>
+        <input type="text" class="form-control" id="Location" asp-for="Location" placeholder="Locatie" required />
+        <span asp-validation-for="Location" class="text-danger"></span>
     </div>
-
     <div class="form-group">
-        <label>Maximaal aantal deelnemers</label>
-        <input asp-for="MaxParticipants" class="form-control" />
-        <span asp-validation-for="MaxParticipants" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label>Wervende Tekst</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <label for="Description">Beschrijving</label>
+        <textarea class="form-control" id="Description" asp-for="Description" placeholder="Beschrijving" required></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-
     <div class="form-group">
-        <label>Categorie</label>
-        <select asp-for="Category" class="form-control">
-            <option value="Foodtruck">Foodtruck</option>
-            <option value="Theater">Theater</option>
-            <option value="Muziek">Muziek</option>
-            <option value="Dating">Dating</option>
+        <label for="MaxParticipants">Max deelnemers</label>
+        <input type="number" class="form-control" id="MaxParticipants" asp-for="MaxParticipants" placeholder="Max deelnemers" required />
+        <span asp-validation-for="MaxParticipants" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Cost">Kosten (€)</label>
+        <input type="number" class="form-control" id="Cost" asp-for="Cost" step="0.01" required />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Category">Categorie</label>
+        <select class="form-control" id="Category" asp-for="Category" required>
+            <option value="">Selecteer een categorie</option>
+            <option value="foodtruckfestivals">Foodtruckfestival</option>
+            <option value="theatervoorstellingen">Theatervoorstelling</option>
+            <option value="dating events">Dating Event</option>
+            <option value="muziekoptredens">Muziekoptreden</option>
         </select>
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
-
-    <button type="submit" class="btn btn-primary">Evenement Aanmaken</button>
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+    <a href="/Organisator/Index" class="btn btn-secondary">Annuleren</a>
 </form>
+
+@section Scripts {
+    <!-- Zorg ervoor dat de validatie wordt ondersteund -->
+    <partial name="_ValidationScriptsPartial" />
+}

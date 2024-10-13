@@ -1,18 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVCapp.Db; // Zorg ervoor dat je de juiste namespace gebruikt voor je DbContext
 using MVCapp.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MVCapp.Controllers
 {
     public class OrganisatorController : Controller
     {
-        private static List<Organisator> events = new List<Organisator>();
+        private readonly VoorbeeldDb _context;
 
+        // Injecteer de DbContext via de constructor
+        public OrganisatorController(VoorbeeldDb context)
+        {
+            _context = context;
+        }
 
         // GET: Organisator/Index
         public IActionResult Index()
         {
+            // Haal de lijst van evenementen op uit de database en stuur deze naar de view
+            var events = _context.Evenementen.ToList();
             return View(events);
         }
 
@@ -29,17 +36,22 @@ namespace MVCapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                newEvent.Id = events.Count + 1;
-                events.Add(newEvent);
+                // Voeg het nieuwe evenement toe aan de database
+                _context.Evenementen.Add(newEvent);
+
+                // Zorg ervoor dat SaveChanges wordt aangeroepen om de wijzigingen op te slaan
+                _context.SaveChanges();
+
                 return RedirectToAction("Index");
             }
+            // Als het model ongeldig is, blijf op de Create-pagina
             return View(newEvent);
         }
 
         // GET: Organisator/Edit/5
         public IActionResult Edit(int id)
         {
-            var eventToEdit = events.FirstOrDefault(e => e.Id == id);
+            var eventToEdit = _context.Evenementen.FirstOrDefault(e => e.Id == id);
             if (eventToEdit == null)
             {
                 return NotFound();
@@ -54,9 +66,10 @@ namespace MVCapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var eventToUpdate = events.FirstOrDefault(e => e.Id == id);
+                var eventToUpdate = _context.Evenementen.FirstOrDefault(e => e.Id == id);
                 if (eventToUpdate != null)
                 {
+                    // Werk de evenementdetails bij
                     eventToUpdate.Title = updatedEvent.Title;
                     eventToUpdate.Location = updatedEvent.Location;
                     eventToUpdate.EventDateTime = updatedEvent.EventDateTime;
@@ -64,23 +77,30 @@ namespace MVCapp.Controllers
                     eventToUpdate.MaxParticipants = updatedEvent.MaxParticipants;
                     eventToUpdate.Description = updatedEvent.Description;
                     eventToUpdate.Category = updatedEvent.Category;
-                    eventToUpdate.ImagePath = updatedEvent.ImagePath;
+
+                    // Sla de wijzigingen op in de database
+                    _context.SaveChanges();
 
                     return RedirectToAction("Index");
                 }
+                return NotFound();
             }
             return View(updatedEvent);
         }
 
-        // GET: Organisator/Delete/5
+        // POST: Organisator/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var eventToDelete = events.FirstOrDefault(e => e.Id == id);
+            var eventToDelete = _context.Evenementen.FirstOrDefault(e => e.Id == id);
             if (eventToDelete != null)
             {
-                events.Remove(eventToDelete);
+                _context.Evenementen.Remove(eventToDelete);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return NotFound();
         }
     }
 }

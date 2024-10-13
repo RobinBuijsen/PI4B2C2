@@ -1,32 +1,52 @@
 ﻿@model IEnumerable<MVCapp.Models.Organisator>
 
-@{
-    ViewData["Title"] = "Mijn Evenementen";
-}
-
 <h2>Mijn Evenementen</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Titel</th>
-            <th>Locatie</th>
-            <th>Datum</th>
-            <th>Acties</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<p>
+    <a href="/Organisator/Create" class="btn btn-success">Nieuw Evenement</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@item.Title</td>
-                <td>@item.Location</td>
-                <td>@item.EventDateTime.ToString("dd-MM-yyyy HH:mm")</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Bewerken</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Verwijderen</a>
-                </td>
+                <th>Titel</th>
+                <th>Locatie</th>
+                <th>Datum & Tijd</th>
+                <th>Max deelnemers</th>
+                <th>Kosten</th>
+                <th>Categorie</th>
+                <th>Beschrijving</th>
+                <th>Acties</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Location</td>
+                    <td>@item.EventDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@item.MaxParticipants</td>
+                    <td>@item.Cost</td>
+                    <td>@item.Category</td>
+                    <td>@item.Description</td>
+                    <td>
+                        <!-- Edit knop -->
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Bewerken</a>
+
+                        <!-- Delete knop -->
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Verwijderen</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Er zijn nog geen evenementen beschikbaar.</p>
+}

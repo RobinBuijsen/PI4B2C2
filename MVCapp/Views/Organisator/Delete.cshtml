@@ -1,0 +1,15 @@
+﻿@model MVCapp.Models.Organisator
+
+<h2>Weet u zeker dat u dit evenement wilt verwijderen?</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <p>Datum: @Model.EventDateTime.ToString("dd-MM-yyyy HH:mm")</p>
+    <p>Locatie: @Model.Location</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Verwijderen</button>
+    <a href="/Organisator/Index" class="btn btn-secondary">Annuleren</a>
+</form>
