@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MVCapp.Models.Organisator>
+
+<h2>Beschikbare Evenementen</h2>
+
+<!-- Filter formulier -->
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="category">Filter op categorie:</label>
+        <select class="form-control" id="category" name="category" onchange="this.form.submit()">
+            <option value="">Alle categorieën</option>
+            <option value="foodtruckfestivals" selected="@(Context.Request.Query["category"] == "foodtruckfestivals")">Foodtruckfestival</option>
+            <option value="theatervoorstellingen" selected="@(Context.Request.Query["category"] == "theatervoorstellingen")">Theatervoorstelling</option>
+            <option value="dating events" selected="@(Context.Request.Query["category"] == "dating events")">Dating Event</option>
+            <option value="muziekoptredens" selected="@(Context.Request.Query["category"] == "muziekoptredens")">Muziekoptreden</option>
+        </select>
+    </div>
+</form>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Locatie</th>
+            <th>Datum & Tijd</th>
+            <th>Max deelnemers</th>
+            <th>Kosten</th>
+            <th>Categorie</th>
+            <th>Beschrijving</th>
+            <th>Acties</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Location</td>
+                <td>@item.EventDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                <td>@item.MaxParticipants</td>
+                <td>@item.Cost</td>
+                <td>@item.Category</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (item.MaxParticipants > 0)
+                    {
+                        <form method="post" asp-action="KoopTicket" asp-controller="Bezoeker" class="ticket-form">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-success">Koop Ticket</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="text-danger">Uitverkocht</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.ticket-form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                var confirmed = confirm('Weet u zeker dat u een ticket wilt kopen voor dit evenement?');
+                if (!confirmed) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}
