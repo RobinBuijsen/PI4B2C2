@@ -1,57 +1,38 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
 }
 
-/* Landing Page */
-.landing-page {
+/* Zorg ervoor dat de body en content zich aanpassen aan de beschikbare ruimte */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Zorg ervoor dat de content de resterende ruimte vult */
+.content-container {
+    flex: 1; /* Dit zorgt ervoor dat de content de resterende ruimte inneemt */
+    padding-top: 120px; /* Ruimte voor de vaste header */
+    padding-bottom: 80px; /* Ruimte voor de vaste footer */
+    box-sizing: border-box;
+    overflow-y: auto; /* Maakt het mogelijk om binnen de content te scrollen */
+}
+
+/* Zorg ervoor dat de footer altijd onderaan staat */
+footer {
+    background-color: #333;
+    color: white;
     text-align: center;
-}
-
-h1 {
-    font-size: 3.5em; /* Vergroot de koptekst */
-    color: #333;
-    margin-bottom: 30px;
-}
-
-.eventia-logo {
-    width: 300px; /* Vergroot de breedte van de afbeelding */
-    height: auto;
-    margin-bottom: 40px;
-}
-
-.button-container {
-    margin-top: 30px;
-}
-
-.button {
-    display: inline-block;
-    padding: 20px 40px; /* Vergroot de padding voor grotere knoppen */
-    margin: 15px;
-    font-size: 1.5em; /* Vergroot de tekst in de knoppen */
-    text-decoration: none;
-    color: black;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Voeg een transform effect toe */
-}
-
-.bezoeker {
-    background-color: yellow;
-}
-
-.organisator {
-    background-color: red;
-}
-
-.button:hover {
-    opacity: 0.9;
-    transform: scale(1.05); /* Voeg een lichte vergroting toe op hover */
+    padding: 20px 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 /* Header en Navigatie */
@@ -65,6 +46,51 @@ header.navbar {
     z-index: 1000;
     padding: 20px 0;
     font-size: 1.25em;
+}
+
+/* Overige styling blijft hetzelfde zoals in je eerdere code */
+.landing-page {
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.eventia-logo {
+    width: 300px;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.button-container {
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-block;
+    padding: 20px 40px;
+    margin: 15px;
+    font-size: 1.5em;
+    text-decoration: none;
+    color: black;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.bezoeker {
+    background-color: yellow;
+}
+
+.organisator {
+    background-color: red;
+}
+
+.button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
 }
 
 .navbar-container {
@@ -102,8 +128,56 @@ header.navbar {
                 color: #ddd;
             }
 
-/* Inhoud-container om te zorgen dat de inhoud niet onder de header valt */
-.content-container {
-    padding-top: 120px;
+.table th, .table td {
     text-align: center;
+    vertical-align: middle;
+}
+
+.table {
+    margin-top: 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .table th {
+        background-color: #333;
+        color: white;
+        padding: 15px;
+    }
+
+    .table td {
+        background-color: #fff;
+        color: #333;
+        padding: 10px;
+    }
+
+.btn-success {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}
+
+    .btn-success:hover {
+        background-color: darkgreen;
+        color: white;
+    }
+
+.alert {
+    width: 50%;
+    margin: 10px auto;
+}
+
+/* Zorg ervoor dat de scrollbalk aan de rechterkant staat */
+html, body {
+    overflow-x: hidden; /* Verberg horizontale scrollbars */
+    width: 100%; /* Zorg ervoor dat de pagina de volledige breedte inneemt */
+}
+
+.content-container {
+    width: 100%; /* Zorg ervoor dat de content-container de volledige breedte van de pagina inneemt */
+    max-width: 1200px; /* maximale breedte van de content-container */
+    margin: 0 auto; /* Zorg ervoor dat de content gecentreerd is binnen de pagina */
 }
